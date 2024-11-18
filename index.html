@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="TEXGen: a Generative Diffusion Model for Mesh Textures">
+  <meta name="keywords" content="3D generation, textures, diffusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TEXGen</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+
+  <style>
+    .render_wrapper {
+        position: relative;
+        height: 350px;
+    }
+    .external-link {
+    color: #ffffff !important; 
+    background-color: rgb(104, 161, 135) !important;
+    border-radius: 10px !important;
+    font-size: 12px !important;
+    }
+
+    .external-link .icon {
+    font-size: 20px !important;
+    }
+
+    .external-link:hover {
+    background-color: #555555 !important;
+    }
+
+    .conference {
+    font-family: 'Google Sans', sans-serif;
+    color: hsl(240, 2%, 10%) !important;
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+    }
+
+    .results-carousel textbox {
+    font-size: 7px; 
+    font-family: 'Google Sans', cursive, sans-serif;
+    color: hsl(321, 56%, 56%) !important;
+    }
+    .dialog-box {
+        background-color: rgba(255, 255, 255, 0.5); 
+        border: 1px solid rgba(96, 85, 85, 0.494);
+        padding: 10px; 
+        border-radius: 15px; 
+        z-index: 1000; 
+        font-size: 14px; 
+        font-family: 'Comic Sans MS', cursive, sans-serif; 
+        color: hsl(322, 33%, 22%) !important;
+        font-weight: bold; 
+    }
+
+    .video-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px; /* 控制视频间距 */
+    }
+    .video-wrapper .item {
+        flex: 0 0 calc(20% - 15px); /* 每个视频占一行的 20%，扣除间距 */
+    }
+    .video-wrapper video {
+        width: 100%;
+        height: auto;
+    }
+  </style>
+
+  <!-- Import the component -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title">TEXGen: a Generative Diffusion Model for Mesh Textures</h1>
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block">
+                            <a href="https://scholar.google.com/citations?user=JX8kSoEAAAAJ&hl=zh-CN" target="_Blank">Xin Yu</a>,</span>
+                        <span class="author-block">
+                            <a href="https://yuanze.me" target="_Blank">Ze Yuan</a>,</span>
+                        <span class="author-block">
+                            <a href="https://scholar.google.com/citations?user=b7ZJV9oAAAAJ&hl=en" target="_Blank">Yuan-Chen Guo</a>,
+                        </span>
+                        <span class="author-block">
+                            <a href="https://scholar.google.com/citations?user=sjFapgUAAAAJ&hl=zh-CN" target="_Blank">Ying-Tian Liu</a>,
+                        </span>
+                        <span class="author-block">
+                            <a href="https://sites.google.com/view/jianhuiliu/home" target="_Blank">JianHui Liu</a>,
+                        </span>
+                        <span class="author-block">
+                            Yangguang Li,
+                        </span>
+                        <span class="author-block">
+                            <a href="https://yanpei.me" target="_Blank">Yan-Pei Cao</a>,
+                        </span>
+                        <span class="author-block">
+                            <a href="https://scholar.google.com/citations?user=Dqjnn0gAAAAJ&hl=zh-CN" target="_Blank">Ding Liang</a>,
+                        </span>
+                        <span class="author-block">
+                            <a href="https://xjqi.github.io/" target="_Blank">Xiaojuan Qi</a>,
+                        </span>
+                    </div>
+
+                    <!-- <div class="is-size-5 publication-authors">
+                        <span class="author-block"><sup>1</sup>The University of Hong Kong,</span>
+                        <span class="author-block"><sup>2</sup>The Chinese University of Hong Kong,</span>
+                        <span class="author-block"><sup>3</sup>TCL Corporate Research</span>
+                    </div> -->
+                    <div class="is-size-5 conference">
+                        <span class="author-block">SIGGRAPH Asia 2024 & TOG 2024</span>
+                    </div>
+
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+                            <!-- PDF Link. -->
+                            <span class="link-block">
+                                <a href="./paper/TEXGen.pdf"
+                                    class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </span>
+                                    <span>Paper</span>
+                                </a>
+                            </span>
+                            <span class="link-block">
+                                <!-- TODO: -->
+                                <a class="external-link button is-normal is-rounded is-dark" href="https://arxiv.org/abs/unknown">
+                                    <span class="icon">
+                                        <i class="ai ai-arxiv"></i>
+                                    </span>
+                                    <span>arXiv</span>
+                                </a>
+                            </span>
+
+                            <!-- Github Link. -->
+                            <span class="link-block">
+                                <!-- TODO: -->
+                                <a href="https://github.com/CVMI-Lab/Point-UV-Diffusion" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>Code</span>
+                                </a>
+                            </span>
+                            <!-- Dataset Link. -->
+                            <span class="link-block"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+            <img src="./figs/teaser.jpg">
+            <!-- <h2 class=" subtitle has-text-centered" style="padding-top: 10px">
+                A gallery of generated results by our Point-UV Diffusion. Our method is capable of processing meshes of any genus, generating diversified, geometry-compatible, and high-fidelity textures. 
+            </h2> -->
+        </div>
+    </div>
+</section>
+
+<section class="section hero is-light">
+    <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        While high-quality texture maps are essential for realistic 3D asset rendering, few studies have explored learning 
+                        directly in the texture space, especially on large-scale datasets. In this work, we depart from the conventional 
+                        approach of relying on pre-trained 2D diffusion models for testtime optimization of 3D textures. 
+                        Instead, we focus on the fundamental problem of learning in the UV texture space itself. For the first time, 
+                        we train a large diffusion model capable of directly generating high-resolution texture maps in a feed-forward manner. 
+                        To facilitate efficient learning in high-resolution UV spaces, we propose a scalable network architecture that 
+                        interleaves convolutions on UV maps with attention layers on point clouds. Leveraging this architectural design, 
+                        we train a 700 million parameter diffusion model that can generate UV texture maps guided by text prompts and 
+                        single-view images. Once trained, our model naturally supports various extended applications, including text-guided 
+                        texture inpainting, sparse-view texture completion, and text-driven texture synthesis. 
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero video-section">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+            <h2 class="title is-4">Fast Forward</h2>
+            <video controls width="100%">
+                <source src="./videos/fastforward.mov" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</section>
+
+<section class="hero video-section">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+            <h2 class="title is-4">Details</h2>
+            <div class="video-wrapper">
+                <!-- 视频列表 -->
+                <div class="item">
+                    <video poster="" id="4" autoplay controls muted loop playsinline>
+                        <source src="./videos/4.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="7" autoplay controls muted loop playsinline>
+                        <source src="./videos/7.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="6" autoplay controls muted loop playsinline>
+                        <source src="./videos/6.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="2" autoplay controls muted loop playsinline>
+                        <source src="./videos/2.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="13" autoplay controls muted loop playsinline>
+                        <source src="./videos/13.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="8" autoplay controls muted loop playsinline>
+                        <source src="./videos/8.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="12" autoplay controls muted loop playsinline>
+                        <source src="./videos/12.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="15" autoplay controls muted loop playsinline>
+                        <source src="./videos/15.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="5" autoplay controls muted loop playsinline>
+                        <source src="./videos/5.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="10" autoplay controls muted loop playsinline>
+                        <source src="./videos/10.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="9" autoplay controls muted loop playsinline>
+                        <source src="./videos/9.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="11" autoplay controls muted loop playsinline>
+                        <source src="./videos/11.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="3" autoplay controls muted loop playsinline>
+                        <source src="./videos/3.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="14" autoplay controls muted loop playsinline>
+                        <source src="./videos/14.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="item">
+                    <video poster="" id="1" autoplay controls muted loop playsinline>
+                        <source src="./videos/1.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero video-section">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+            <h2 class="title is-4">Text-Condition Texture Generation</h2>
+            <video controls autoplay controls muted loop playsinline>
+                <source src="./videos/output.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+       <!-- Overview. -->
+        <div class="columns is-centered" style="margin-top: 0px">
+            <div class="column is-full-width">
+                <h2 class="title is-4">Method Overview</h2>
+                <!-- <div class="content has-text-justified" style="padding-top: 15px">
+                    Our Point-UV diffusion starts with a 3D point diffusion model to colorize a set of sampled points on the mesh surface. This stage leverages the 3D topology for predicting low-frequency colors on the mesh, without being affected by the discontinuity of the UV map.  
+                    Based on the color components generated by the coarse stage, we further build a 2D diffusion model on the UV space to enhance the fidelity of the generated texture.
+                </div> -->
+                <img src="./figs/overview.jpg"/>
+                <img src="./figs/blocks.jpg"/>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{texgen2024yu,
+        author    = {Xin Yu, Ze Yuan, Yuan-Chen Guo, Ying-Tian Liu, JianHui Liu, Yangguang Li, Yan-Pei Cao, Ding Liang, Xiaojuan Qi},
+        title     = {TEXGen: a Generative Diffusion Model for Mesh Textures},
+        journal   = {ACM Transactions on Graphics (TOG)},
+        year      = {2024},
+        publisher = {ACM},
+      }</code></pre>
+  </div>
+</section>
+
+        <!-- volume    = {43}, -->
+        <!-- number    = {4}, -->
+        <!-- pages     = {123:1--123:15}, -->
+        <!-- doi       = {10.1145/XXXXXX.XXXXXX}, -->
+
+<footer class="footer">
+    <div class="container">
+        <div class="content has-text-centered">
+            <!-- <a class="icon-link" href="#">
+                <i class="fas fa-file-pdf"></i>
+            </a>
+            <a class="icon-link" href="https://github.com/XinYu-Andy" class="external-link" disabled>
+                <i class="fab fa-github"></i>
+            </a> -->
+        </div>
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content">
+                    <p style="text-align:center">
+                        Source code mainly borrowed from <a href="https://keunhong.com/">Keunhong Park</a>'s <a
+                            href="https://nerfies.github.io/">Nerfies website</a>.
+                    </p>
+                    <p style="text-align:center">
+                        Please contact <a href="https://github.com/XinYu-Andy" style="color:rgb(46, 151, 92);">Xin Yu</a> (email at <a href="mailto:yuxin27g@gmail.com" style="color:rgb(46, 151, 92);">yuxin27g@gmail.com</a>) for feedback and questions.
+                    </p>                    
+                    <!-- hitwebcounter Code START -->
+<a href="https://www.hitwebcounter.com" target="_blank">
+    <img src="https://hitwebcounter.com/counter/counter.php?page=8782868&style=0007&nbdigits=5&type=page&initCount=0" title="Counter Widget" Alt="Visit counter For Websites"   border="0" /></a>      
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
