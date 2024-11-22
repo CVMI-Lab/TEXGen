@@ -20,6 +20,9 @@
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.svg">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 
   <style>
     .render_wrapper {
@@ -42,27 +45,9 @@
     }
 
     .conference {
-    font-family: 'Google Sans', sans-serif;
     color: hsl(240, 2%, 10%) !important;
-    font-family: 'Merriweather', serif;
-    font-weight: 500;
-    }
-
-    .results-carousel textbox {
-    font-size: 7px; 
-    font-family: 'Google Sans', cursive, sans-serif;
-    color: hsl(321, 56%, 56%) !important;
-    }
-    .dialog-box {
-        background-color: rgba(255, 255, 255, 0.5); 
-        border: 1px solid rgba(96, 85, 85, 0.494);
-        padding: 10px; 
-        border-radius: 15px; 
-        z-index: 1000; 
-        font-size: 14px; 
-        font-family: 'Comic Sans MS', cursive, sans-serif; 
-        color: hsl(322, 33%, 22%) !important;
-        font-weight: bold; 
+    font-family: 'Noto Sans', serif;
+    font-weight: 600;
     }
 
     .video-wrapper {
@@ -77,6 +62,14 @@
     .video-wrapper video {
         width: 100%;
         height: auto;
+    }
+    .affiliation {
+        color:rgb(0,0,0);
+    }
+    .affiliation-block {
+        color:rgb(0,0,0);
+        font-size: 20px;
+        font-family: 'Noto Sans', sans-serif;
     }
   </style>
 
@@ -100,37 +93,39 @@
                     <h1 class="title is-1 publication-title">TEXGen: a Generative Diffusion Model for Mesh Textures</h1>
                     <div class="is-size-5 publication-authors">
                         <span class="author-block">
-                            <a href="https://scholar.google.com/citations?user=JX8kSoEAAAAJ&hl=zh-CN" target="_Blank">Xin Yu</a>,</span>
+                            <a href="https://scholar.google.com/citations?user=JX8kSoEAAAAJ&hl=zh-CN" target="_Blank">Xin Yu</a><sup class="affiliation">1</sup>,</span>
                         <span class="author-block">
-                            <a href="https://yuanze.me" target="_Blank">Ze Yuan</a>,</span>
+                            <a href="https://yuanze.me" target="_Blank">Ze Yuan</a><sup class="affiliation">2</sup>,</span>
                         <span class="author-block">
-                            <a href="https://scholar.google.com/citations?user=b7ZJV9oAAAAJ&hl=en" target="_Blank">Yuan-Chen Guo</a>,
+                            <a href="https://scholar.google.com/citations?user=b7ZJV9oAAAAJ&hl=en" target="_Blank">Yuan-Chen Guo</a><sup class="affiliation">4</sup>,
                         </span>
                         <span class="author-block">
-                            <a href="https://scholar.google.com/citations?user=sjFapgUAAAAJ&hl=zh-CN" target="_Blank">Ying-Tian Liu</a>,
+                            <a href="https://scholar.google.com/citations?user=sjFapgUAAAAJ&hl=zh-CN" target="_Blank">Ying-Tian Liu</a><sup class="affiliation">3</sup>,
                         </span>
                         <span class="author-block">
-                            <a href="https://sites.google.com/view/jianhuiliu/home" target="_Blank">JianHui Liu</a>,
+                            <a href="https://sites.google.com/view/jianhuiliu/home" target="_Blank">JianHui Liu</a><sup class="affiliation">1</sup>,
                         </span>
                         <span class="author-block">
-                            Yangguang Li,
+                            Yangguang Li<sup class="affiliation">4</sup>,
                         </span>
                         <span class="author-block">
-                            <a href="https://yanpei.me" target="_Blank">Yan-Pei Cao</a>,
+                            <a href="https://yanpei.me" target="_Blank">Yan-Pei Cao</a><sup class="affiliation">4</sup>,
                         </span>
                         <span class="author-block">
-                            <a href="https://scholar.google.com/citations?user=Dqjnn0gAAAAJ&hl=zh-CN" target="_Blank">Ding Liang</a>,
+                            <a href="https://scholar.google.com/citations?user=Dqjnn0gAAAAJ&hl=zh-CN" target="_Blank">Ding Liang</a><sup class="affiliation">4</sup>,
                         </span>
                         <span class="author-block">
-                            <a href="https://xjqi.github.io/" target="_Blank">Xiaojuan Qi</a>
+                            <a href="https://xjqi.github.io/" target="_Blank">Xiaojuan Qi</a><sup class="affiliation">1</sup>
                         </span>
                     </div>
 
-                    <!-- <div class="is-size-5 publication-authors">
-                        <span class="author-block"><sup>1</sup>The University of Hong Kong,</span>
-                        <span class="author-block"><sup>2</sup>The Chinese University of Hong Kong,</span>
-                        <span class="author-block"><sup>3</sup>TCL Corporate Research</span>
-                    </div> -->
+                    <div class="is-size-5 publication-authors">
+                        <span class="affiliation-block"><sup>1</sup>The University of Hong Kong,</span>
+                        <span class="affiliation-block"><sup>2</sup>Beihang University,</span>
+                        <span class="affiliation-block"><sup>3</sup>Tsinghua University,</span>
+                        <span class="affiliation-block"><sup>4</sup>VAST</span>
+                    </div>
+
                     <div class="is-size-5 conference">
                         <span class="author-block">SIGGRAPH Asia 2024 & TOG 2024</span>
                     </div>
@@ -360,11 +355,6 @@
       }</code></pre>
   </div>
 </section>
-
-        <!-- volume    = {43}, -->
-        <!-- number    = {4}, -->
-        <!-- pages     = {123:1--123:15}, -->
-        <!-- doi       = {10.1145/XXXXXX.XXXXXX}, -->
 
 <footer class="footer">
     <div class="container">
